@@ -1,0 +1,148 @@
+git diff to compare working directory and staging area
+git diff --staged to compare staging area and resent commit  
+git diff --hard which disgards any changes either in working directory or staging directory  
+
+You just learned how to initialise repository and add commits to it in the staging area. So far each commits you made has been built upon on the previous commit, creating a linear commit history. 
+
+Now lets take a look at sometime when you might wanna make a commit history which branches into multiple versions
+
+Making a straight line changes make lots of sense if you are fixing bug, adding new features, or updaing documentation 
+
+What if you wanna try out new experimental feature, that you are still not sure if will work.
+
+But still you wanted a working demo to friends when they ask what you are working on. Or may be you are learning a intalian version of your project 
+
+In this case you probably wante to eventually create a setting to switch between projects 
+
+May be its just a first step you just try to change in the text and see if you really wanna it little 
+
+Ofcourse you could make changes and record your ideas, of all your commits, and then use "git checkout" and switch to official version if you really need to show to somebody. And then come back to your other version afterwords. 
+
+And what if you found a bug in official real version? And you wanted to fix there? 
+
+You need to update the records and use  this commit "fix" as your real verision. This will be lot of overhead. To make this kind of situation easier. 
+
+Git allows you to create labels for your commits, These lables are called branches.
+
+In the case we have spoke we will have three different branches. 
+
+1. Master: Master is the name given to main branch to most git repository. And everytime you create a repository git creats a master branch for you.
+
+And other three things we call:
+
+italian
+
+exp 
+
+remember last lesson when you checked out some old commits you get the detached head message, basically at that point git was warning you, that you are looking at a commit, that was labelled with the branch name. So far you have always either been in a detached head state, or on the master branch which gets creates for you. 
+
+Its possible to check out a branch in the same way you check out commits in past, expect the hopefully the human readable branch name rather than unpronouncable series of characters.
+
+If you check out a branch and then make a commit, the branch label automatically upadtes to new commit, and that branch also stays checked out so you don't have to check it out again. This is how you manage to stay on master branch, without knowing anything about branches until this point.
+
+As a matter of terminology we sometimes refer to current last commit on a branch as being tip of that branch. It is possible to have a multiple branch labels attached to a single commit and making a new commit will only update the branch you have checked out and leave other alone.
+
+At this point its natural to wonder is there any way to combine any time branches, 
+
+Say your "experimental feature" has finally worked out.But your main branch has grown and two diverged. 
+
+The process of combining two commits, is called as merging,  
+
+You have to comfortable with creating, checking out and commiting to branches. 
+
+Experimental change on asteriods repository:
+
+Creating a easy mode branch, but not on the master branch though, since i dont consider official update to the game.
+
+You use command "git branch" to create new branches.
+First when you run "git branch" with no arguments, which shows you your current branches, right now the only branch is master which is the developer branch. 
+
+Now if you run "git branch easy-mode" that is when you give arguments to branch, it creates a new branch with that name.
+
+Now when you run git branch again: "easy-mode" branch will be created and there will be "*master" will be there. Which, master is the branch that is currently checked out. And thats the one will be updated if you make a change, but thats not what you want. 
+
+But you wanted "easy-mode" to be updated when you make a change, and "master" stay the same. 
+
+And so when you run "git checkout easy-mode" and now when you run "git branch" again. You can see the following:
+
+*easy-mode
+ master
+
+ which says easy-mode is the checkout branch. 
+
+ Since you have just now created the "easy-mode" branch it has the same code as the master.
+
+ But we will change that. 
+
+ I will add my changes to staging area "git add game.js"
+
+ What are some situations when branches would be helpful in keeping your history organized? How would branches help? 
+
+ When making beta project codes. 
+
+ Last time we spoke about branch of project when you wanted to create a solo project. 
+
+ You might also wanted to use branch to keep things organised when working with others. 
+
+ If you and your collobrater make changes on the same branch, you can't work on seperate feature simultaneously.
+
+ Work flow:
+
+ A common work flow for people working on projects together, includes making a new branch for every feature or bug fix. This way if multiple people are working on the same branch, they can each check out their branch to continue work after taking a break. 
+
+ Without worrying about things changing up from under them. 
+
+ Then once a feature or big-fix is complete, the author can either update the master to also point to the tip of the new branch, or if there have been changes to master in the mean time, combine it with the current master, using gits and merge feature. 
+
+ New feature for asteriod game:
+
+ Coins:
+
+ I have been thinking of modifying the asteroiid game to add a new feature that adds a new game mechanic. 
+
+ I'm going to check out now "git checkout coins"
+
+ The fact that its a remote branch means, i didn't create it by my self, instead other person in your group created it, and so you're looking at her branch. 
+
+ git can also help you visualize the branch structure, by the command "git log --graph --oneline master coins"
+
+ the "--oneline " was added to make the output shorter in one line. and you need to tell which branches you needed to visualise on. 
+
+ Git logs doesn't necessarly show you every commit, so how does git log decide which commit to show you. 
+
+ It turns out that each commit, knows about its parent, that is it stores reference to the commit that was checked out when it was made. If you wanna branch when you commit, it still just stores the commit id, then that was on the tip on the branch, commit doesn't care anything about branch names, only branches themself store about  the position of the branches.
+
+ To make it clear what info is store d by git.
+
+ Log starts with a current commit, or latest commit of any branch or branches that specified and traces back until it gets to commit that doesn't have a parent. This will generally be the initial commit, this reaches us to the concept of reachability 
+
+ You can see in the diagram, there are some commits that can't be reached by other commits, suppose you check out that one commit, and then you made a new commit from there,  
+
+ Now that you know about branches and reachability, you know now everything to understand "detached head" message we saw earlier.
+
+ Remember to get this message "detached head" we checked out a commit not a branch. 
+
+ Remember that the head just means, current commit, so head now points to this commit, git says first you look around and make experimental changes and commit them, 
+
+ You now know that the git history now could be non-linear. So if you commit changes, then it would look like what we saw before, 
+
+ Next it says "you can discard any commits you make in this state without impacting any branches"
+
+ Next thing says "if you wanna to create a new branch to retains commits" you can do so by this command "git checkout -b new_branch_name"
+
+ Running "git checkout -b new_branch_name" is equivalent to running two commands, first:
+
+ 1. git branch new_branch_name and then running
+ 2. git checkout new_branch_name 
+
+ since these two above commands people wanna do often, pretty much every time you are making a new feature its nice there is shortcut called:
+
+ "git checkout -b new_branch_name"
+
+ if you do either version of this commands while we are still on outer commit, then the new branch will be creatd here. and then any further commits will be ont this new branch since we already know that making new commits brings the branch with us.
+
+ You learned how to create branches and how to keep track of which branch has which commits using diagrams.
+
+ Now lets look at how to combine changes form multiple branches into single version. 
+
+ Merging files:
