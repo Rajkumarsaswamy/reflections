@@ -1,0 +1,56 @@
+How did viewing a diff between two versions of a file help you see the bug that was introduced?
+It lessons the time od debugging and reduces tedious work of finding bugs. 
+
+How could having easy access to the entire history of the file make you a more efficient programmer in long term?
+
+You will know what are changes you have made. and have a clear idea of what are all you have come after during the coarse. 
+
+Concept Map:
+
+1. version control: Ex: Manual saving, Dropbox, Google Docs, Wikipedia, Git, SVN.
+
+2. Commit: Git commit. 
+
+How to view previous commits in Git. 
+
+3. diff: 
+
+What do you think are the pros and cons of manually choosing when to create a commit, like you do in Git, vs having versions automatically saved, like Google Docs does?
+
+It will make lot more sense, and doesn't have lots of commits which are then later tedious find the required change 
+
+Tracking Across Files:
+
+Repository: A repository is called collection of files. 
+commands:
+
+git log --stat This gives a stat of which gives a statistics of which files have changed in each commit. 
+
+Why do you think some version control systems, like Git, allow saving multiple files in one commit, while others, like Google Docs, treat each file separately?
+
+Because in some applications there could be interlink between each files such as how html, css and js files have in common for web development application. 
+
+How can you use the commands git log and git diff to view the history of files?
+
+Just type in the terminal of the directory were you have the files, and you will be able to find the differences. 
+
+Git repository is a collection of files that are tracked by git cohesive unit.
+
+Repository are parts of git and commits are part of repository. 
+
+Clone takes an existing repository and creates a new one just like it. Clone operates on repository 
+
+Log shows commits in the repisitory part to the current commit 
+
+Log operates on commit. You could also say commits are part of log. You can also assume it has connection to a repository as well. Since log shows commits in a particular repository. 
+
+You have seen how a commit is a snapshot of every file in the repository at the time the commit was made. We can use git to view the difference between any two commits. 
+
+Git checkout: Its sort of like restoring to a previous version. Git checkout means restoring all of your files to how they were at the time that commit was made.
+
+Why would you want to check out to previous version of code? 
+One reason might be, if a bug was introduced, but you are not sure which commit introduced it. You can test wether a commit has the bug by checking out that commit and running the code. 
+
+Now that you have your workspace set up, what do you want to try using Git for?
+
+Create repositories, use git commands, and write efficient code. 
